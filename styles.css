@@ -1,0 +1,44 @@
+/* Custom styles for the report */
+body {
+  max-width: 1800px !important;
+  margin: 0 auto;
+  padding: 2em 3em;
+}
+
+.page-columns {
+  display: grid;
+  gap: 0;
+  grid-template-columns: [screen-start] 1fr [page-start] 1400px [page-end] 1fr [screen-end];
+}
+
+.page-columns > * {
+  grid-column: page;
+}
+
+.quarto-figure {
+  margin: 2em 0;
+}
+
+.quarto-figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Additional styles for better readability */
+.content {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Ensure wide figures don't overflow */
+figure {
+  margin: 2em 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+} 

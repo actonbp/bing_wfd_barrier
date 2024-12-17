@@ -1,0 +1,205 @@
+---
+title: "Understanding Student Perceptions of SUD Counseling Careers"
+author: "Research Team"
+format: 
+  html:
+    theme: cosmo
+    code-fold: true
+    toc: true
+    toc-depth: 3
+    fig-width: 15
+    fig-height: 10
+    css: styles.css
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+---
+
+# Understanding Student Perceptions of SUD Counseling Careers
+
+## Overview
+
+This report analyzes focus group discussions about careers in substance use disorder (SUD) counseling, with a particular focus on understanding barriers to entry into the field. Using advanced natural language processing techniques, we identify key themes, relationships, and patterns in how students discuss these career paths and their associated challenges.
+
+```{python}
+#| label: setup
+#| include: false
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pathlib import Path
+import sys
+sys.path.append('src')
+
+from analysis.advanced_nlp_updated import AdvancedTextAnalyzer
+from analysis.barrier_analyzer import BarrierAnalyzer
+from analysis.data_loader import load_focus_group_data
+
+# Set basic plot styles
+plt.style.use('default')
+sns.set_style("whitegrid")
+
+# Initialize analyzers and load data
+text_analyzer = AdvancedTextAnalyzer()
+barrier_analyzer = BarrierAnalyzer()
+texts = load_focus_group_data()
+
+# Close any existing plots
+plt.close('all')
+```
+
+## Barriers to Entry in SUD Counseling
+
+Our analysis revealed five major categories of barriers that students perceive when considering careers in SUD counseling. These barriers are interconnected and often compound each other, creating complex challenges for potential entrants to the field.
+
+### Overview of Barrier Categories
+
+```{python}
+#| label: fig-barrier-overview
+#| fig-cap: "Distribution and Frequency of Barrier Categories"
+#| fig-width: 15
+#| fig-height: 10
+
+from PIL import Image
+img = Image.open('barrier_overview.png')
+display(img)
+```
+
+The analysis reveals that Social/Support barriers are most frequently mentioned (39.2% of discussions), followed by Work-Life Balance (35.8%) and Emotional/Mental barriers (31.7%). Professional/Career and Educational barriers were mentioned in 21.3% and 20.0% of discussions respectively.
+
+### Common Terms Within Each Barrier Category
+
+```{python}
+#| label: fig-barrier-terms
+#| fig-cap: "Most Frequently Mentioned Terms by Barrier Category"
+#| fig-width: 18
+#| fig-height: 15
+
+img = Image.open('barrier_terms.png')
+display(img)
+```
+
+Each barrier category is characterized by specific concerns and challenges:
+
+1. **Educational Barriers (20.0%)**
+   - Primary concerns center around schooling costs and financial aspects
+   - Time commitment for degree completion
+   - Academic requirements and certification processes
+
+2. **Work-Life Balance Barriers (35.8%)**
+   - Time management emerges as the dominant concern
+   - Personal and family life considerations
+   - Stress and pressure from balancing multiple responsibilities
+
+3. **Emotional/Mental Barriers (31.7%)**
+   - Mental health impacts of the work
+   - Need for emotional support and resilience
+   - Concerns about managing work-related stress
+
+4. **Professional/Career Barriers (21.3%)**
+   - Career development and experience requirements
+   - Compensation and financial stability
+   - Future growth opportunities
+
+5. **Social/Support Barriers (39.2%)**
+   - Strong emphasis on need for help and support systems
+   - Importance of professional connections
+   - Access to guidance and resources
+
+### Interconnections Between Barriers
+
+```{python}
+#| label: fig-barrier-network
+#| fig-cap: "Network of Relationships Between Barrier Categories"
+#| fig-width: 15
+#| fig-height: 10
+
+img = Image.open('barrier_network.png')
+display(img)
+```
+
+The network visualization reveals several key relationships between barrier categories:
+
+- Strong connections between Social/Support and Emotional/Mental barriers
+- Work-Life Balance barriers frequently intersect with Educational barriers
+- Professional/Career barriers show connections with Educational barriers
+- Social/Support barriers connect with all other categories
+
+## Major Discussion Themes
+
+Our analysis identified several major themes in the focus group discussions:
+
+```{python}
+#| label: fig-themes
+#| fig-cap: "Distribution and Content of Major Discussion Themes"
+#| fig-width: 15
+#| fig-height: 10
+
+# Discover and visualize themes
+themes = text_analyzer.discover_themes(texts)
+fig = text_analyzer.visualize_discovered_themes(themes)
+
+# Print theme details
+print("\n### Theme Details\n")
+for theme_name, theme_info in themes.items():
+    print(f"\n**{theme_name}** ({theme_info['size']} responses)")
+    print(f"Keywords: _{', '.join(theme_info['keywords'])}_")
+    print(f"Representative quote: '{theme_info['representative_text'][:200]}...'\n")
+```
+
+## Word Frequency Analysis
+
+The word cloud visualization below shows the most frequently discussed terms, color-coded by topic category:
+
+```{python}
+#| label: fig-wordcloud
+#| fig-cap: "Key Terms in Student Discussions (Color-coded by Topic Category)"
+#| fig-width: 15
+#| fig-height: 10
+
+# Create enhanced word cloud
+fig = text_analyzer.create_enhanced_wordcloud(texts)
+```
+
+## Theme Relationships
+
+The network visualization below shows how different themes are interconnected in the discussions:
+
+```{python}
+#| label: fig-theme-network
+#| fig-cap: "Network of Theme Relationships in Discussions"
+#| fig-width: 15
+#| fig-height: 10
+
+# Create thematic relationship visualization
+fig = text_analyzer.analyze_thematic_relationships(texts)
+```
+
+## Key Patterns
+
+The analysis reveals several important patterns in how students discuss careers in SUD counseling:
+
+1. **Barriers to Entry**:
+   - Educational barriers: Cost, requirements, and time commitment
+   - Work-life balance concerns: Stress, workload, and scheduling demands
+   - Professional challenges: Compensation and career advancement
+   - Emotional demands: Burnout risk and emotional intensity
+   - Social factors: Professional recognition and support networks
+
+2. **Personal Impact and Satisfaction**:
+   - Focus on the helping aspects and personal satisfaction
+   - Strong emphasis on making a difference
+   - Connection between personal fulfillment and career choice
+
+3. **Healthcare Integration**:
+   - Connection with broader healthcare career paths
+   - Recognition of mental health importance
+   - Interest in counseling as part of healthcare
+
+4. **Support Systems**:
+   - Role of family and friends in decisions
+   - Value of professional networks
+   - Importance of mentorship
